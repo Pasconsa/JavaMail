@@ -38,7 +38,7 @@ public class AppTest {
 															"Testando e-mail com java",
 															stringBuilderTextoEmail.toString());
 		
-		enviaEmail.EnviarEmail(true);
+		enviaEmail.EnviarEmailAnexo(true);
 		
 		Thread.sleep(5000); //tempo para enviar
 	}
