@@ -27,12 +27,11 @@ public class ObjetoEnviaEmail {      // código retirado AppTest
 		this.listaDestinatarios = listaDestinatarios;
 		this.nomeRemetentes = nomeRemetentes;
 		this.assuntoEmail = assuntoEmail;
-	
 		this.textoEmail = textoEmail;
 		
 	}
 
-	public void EnviarEmail() throws Exception { // necessario colocar exception
+	public void EnviarEmail(boolean envioHtml)  throws Exception { // necessario colocar exception
 
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");/* Autorização */
@@ -66,7 +65,13 @@ public class ObjetoEnviaEmail {      // código retirado AppTest
 		message.setFrom(new InternetAddress(userName, nomeRemetentes)); // Quem esta enviando
 		message.setRecipients(Message.RecipientType.TO, toUser); // email destino
 		message.setSubject(assuntoEmail); // Assunto do email
-		message.setText(textoEmail); // descrição do assunto
+		
+		if (envioHtml) {                        //condição para enviar por html
+			message.setContent(textoEmail, "text/html; charset=utf-8");
+		}else {
+			message.setText(textoEmail);
+		}
+		
 
 		Transport.send(message);
 
